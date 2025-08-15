@@ -1,6 +1,6 @@
 AC_PREREQ([2.68])
 AC_INIT([pamtester],[0.1.2])
-AM_INIT_AUTOMAKE
+AM_INIT_AUTOMAKE([foreign])
 AC_CONFIG_SRCDIR([src/pamtester.c])
 AC_CONFIG_HEADERS(config.h)
 AM_MAINTAINER_MODE
