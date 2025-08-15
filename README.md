@@ -1,7 +1,7 @@
 This is a fork of https://pamtester.sourceforge.net/ to modernize the build
 environment.
 
-===
+---
 
 pamtester - test pluggable authentication modules (PAM) facility
 Copyright (c) 2004-2005 Moriyoshi Koizumi. All right reserved.
