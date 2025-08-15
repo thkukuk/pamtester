@@ -13,4 +13,4 @@ pamtester_SOURCES=\
 	util.h \
 	compat.c \
 	compat.h
-CFLAGS=-Wall
+AM_CFLAGS=-Wall

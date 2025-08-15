@@ -1,10 +1,8 @@
-dnl $Id: configure.in,v 1.6 2005/06/19 15:38:48 moriyoshi Exp $
-
-AC_PREREQ(2.50)
-AC_INIT(pamtester, 0.1.2)
-AM_INIT_AUTOMAKE(pamtester, 0.1.2)
+AC_PREREQ([2.72])
+AC_INIT([pamtester],[0.1.2])
+AM_INIT_AUTOMAKE
 AC_CONFIG_SRCDIR([src/pamtester.c])
-AM_CONFIG_HEADER(config.h)
+AC_CONFIG_HEADERS(config.h)
 AM_MAINTAINER_MODE
 
 AC_SUBST(PACKAGE_VERSION)
@@ -15,7 +13,6 @@ AC_SUBST(PACKAGE_TARNAME)
 AC_PROG_CC
 AC_PROG_LN_S
 AC_PROG_INSTALL
-AC_PROG_LIBTOOL
 
 AC_ARG_WITH([pam], [  --with-pam=PREFIX       specify PAM installation prefix], [
   pam_INCLUDES="-I$withval/include"
@@ -69,17 +66,17 @@ AC_CHECK_HEADERS([pam_appl.h], [
 AC_MSG_CHECKING([if the second argument of pam_conv.conv() takes const pointer])
 ac_save_CFLAGS="$CFLAGS"
 CFLAGS="-Wall -Werror $CFLAGS"
-AC_TRY_COMPILE([
+AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
 #include <$pam_appl_h>
-], [
+]], [[
   int (*conv)(int num_msg, const struct pam_message **msg,
       struct pam_response **resp, void *appdata_ptr) = NULL;
   struct pam_conv c = { conv, NULL };
   c.conv = NULL;
-], [
+]])],[
   AC_MSG_RESULT(yes)
   AC_DEFINE([PAM_CONV_CONST], [const], [Define to `const' if the 2nd arg of pam_conv.conv takes const pointer.])
-], [
+],[
   AC_MSG_RESULT(no)
   AC_DEFINE([PAM_CONV_CONST], [], [Define to `const' if the 2nd arg of pam_conv.conv takes const pointer.])
 ])
@@ -92,7 +89,15 @@ LIBS="$LIBS $pam_LIBS"
 AC_SUBST(INCLUDES)
 
 # Checks for header files.
-AC_HEADER_STDC
+m4_warn([obsolete],
+[The preprocessor macro 'STDC_HEADERS' is obsolete.
+  Except in unusual embedded environments, you can safely include all
+  C89 headers unconditionally.])dnl
+# Autoupdate added the next two lines to ensure that your configure
+# script's behavior did not change.  They are probably safe to remove.
+AC_CHECK_INCLUDES_DEFAULT
+AC_PROG_EGREP
+
 AC_CHECK_HEADERS([string.h unistd.h memory.h errno.h])
 
 # Checks for typedefs, structures, and compiler characteristics.

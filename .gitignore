@@ -53,3 +53,19 @@ dkms.conf
 
 # debug information files
 *.dwo
+
+# autoconf
+COPYING
+INSTALL
+Makefile
+Makefile.in
+autom4te.cache/
+compile
+config.h
+config.log
+config.status
+depcomp
+.deps/
+pamtester
+stamp-h1
+
