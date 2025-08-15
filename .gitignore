@@ -68,4 +68,9 @@ depcomp
 .deps/
 pamtester
 stamp-h1
-
+aclocal.m4
+config.h.in
+configure
+doc/pamtester.1
+install-sh
+missing
