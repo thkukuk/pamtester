@@ -54,6 +54,12 @@ dkms.conf
 # debug information files
 *.dwo
 
+# backup
+*~
+*.orig
+*.bak
+*.rej
+
 # autoconf
 COPYING
 INSTALL

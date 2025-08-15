@@ -1,4 +1,4 @@
-AC_PREREQ([2.72])
+AC_PREREQ([2.68])
 AC_INIT([pamtester],[0.1.2])
 AM_INIT_AUTOMAKE
 AC_CONFIG_SRCDIR([src/pamtester.c])
@@ -15,12 +15,12 @@ AC_PROG_LN_S
 AC_PROG_INSTALL
 
 AC_ARG_WITH([pam], [  --with-pam=PREFIX       specify PAM installation prefix], [
-  pam_INCLUDES="-I$withval/include"
+  pam_CPPFLAGS="-I$withval/include"
   pam_LIBS="-L$withval/lib"
 ])
 
 AC_ARG_WITH([pam], [  --with-pam-includes=DIR specify PAM header location], [
-  pam_INCLUDES="-I$withval"
+  pam_CPPFLAGS="-I$withval"
 ])
 
 AC_ARG_WITH([pam], [  --with-pam-libs=DIR     specify PAM header location], [
@@ -37,7 +37,7 @@ AC_CHECK_LIB([pam], [pam_start], [
 misc_conv_avail=
 
 ac_save_CPPFLAGS="$CPPFLAGS"
-CPPFLAGS="$CPPFLAGS $pam_INCLUDES"
+CPPFLAGS="$CPPFLAGS $pam_CPPFLAGS"
 AC_CHECK_HEADERS([pam/pam_misc.h security/pam_misc.h pam_misc.h], [
   AC_CHECK_LIB([pam_misc], [misc_conv], [
     AC_DEFINE([HAVE_MISC_CONV], [1], [Define to 1 if you have the `misc_conv()' fucntion])
@@ -84,28 +84,13 @@ CFLAGS="$ac_save_CFLAGS"
 CPPFLAGS="$ac_save_CPPFLAGS"
 LIBS="$ac_save_LIBS"
 
-INCLUDES="$INCLUDES $pam_INCLUDES"
+AM_CPPFLAGS="$AM_CPPFLAGS $pam_CPPFLAGS"
 LIBS="$LIBS $pam_LIBS"
-AC_SUBST(INCLUDES)
-
-# Checks for header files.
-m4_warn([obsolete],
-[The preprocessor macro 'STDC_HEADERS' is obsolete.
-  Except in unusual embedded environments, you can safely include all
-  C89 headers unconditionally.])dnl
-# Autoupdate added the next two lines to ensure that your configure
-# script's behavior did not change.  They are probably safe to remove.
-AC_CHECK_INCLUDES_DEFAULT
-AC_PROG_EGREP
-
-AC_CHECK_HEADERS([string.h unistd.h memory.h errno.h])
+AC_SUBST(AM_CPPFLAGS)
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_C_CONST
 AC_TYPE_SIZE_T
-
-# Checks for library functions.
-AC_CHECK_FUNCS([memset strcasecmp strchr strncasecmp strtol strtoul malloc realloc])
 
 AC_CONFIG_FILES([Makefile src/Makefile doc/Makefile doc/pamtester.1])
 AC_OUTPUT
