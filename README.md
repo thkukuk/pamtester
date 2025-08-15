@@ -1,12 +1,12 @@
-This is a fork of https://pamtester.sourceforge.net/ to modernize the build
-environment.
+# pamtester - test pluggable authentication modules (PAM) facility
+Copyright (c) 2004-2005 Moriyoshi Koizumi. All right reserved.
 
 ---
 
-pamtester - test pluggable authentication modules (PAM) facility
-Copyright (c) 2004-2005 Moriyoshi Koizumi. All right reserved.
+This is a fork of https://pamtester.sourceforge.net/ to modernize the build
+environment.
 
-1. What is pamtester?
+## What is pamtester?
 
 pamtester is a tiny program to test the pluggable authentication modules (PAM)
 facility, which is a defacto mechanism for authentication management in many
@@ -17,13 +17,13 @@ that might also be useful for system administrators interested in building a
 centralised authentication system using common standards such as NIS, SASL and
 LDAP.
 
-2. Installation
+## Installation
 
 Just run configure and do the ordinary "make install".  Differences between
 platforms will automatically be handled by the configure script.  Let me know
 if it's not.
 
-3. Using pamtester
+## Using pamtester
 
 pamtester requires at least three arguments to operate.  The first argument
 is "service", which provides the name of the service.  The second one is
@@ -41,15 +41,10 @@ are accepted.
 The list of allowed options is shown below:
 
   - PAM_SILENT
-
   - PAM_DISALLOW_NULL_AUTHTOK
-
   - PAM_ESTABLISH_CRED
-
   - PAM_REINITIALIZE_CRED
-
   - PAM_REFRESH_CRED
-
   - PAM_CHANGE_EXPIRED_AUTHTOK
 
 Additional authentication information such as the name of the remote user,
@@ -58,18 +53,13 @@ the remote host and the tty can be supplied via -I (--item) option.
 The following types of information are supported:
 
   - service
-
   - user
-
   - prompt
-
   - tty
-
   - ruser
-
   - rhost
 
-3. Reporting bugs
+## Reporting bugs
 
 Drop me a line if you find a bug or have any helpful suggession.
 
